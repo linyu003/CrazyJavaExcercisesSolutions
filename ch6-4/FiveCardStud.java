@@ -50,55 +50,56 @@ public class FiveCardStud{
             game.printStatus();
         }
     }
-}
-class Player{
-    private final int seatNumber;
-    boolean isQuit = false;
-    private int cardNum = 0;
-    public static final int MAX_CARD_NUM = 5;
-    Card[] cards = new Card[MAX_CARD_NUM];
-    
-    Player(int seatNumber){
-        this.seatNumber = seatNumber;
-    }
-    boolean isQuitCheck(){return isQuit;}
-    void printStatus(){
-        System.out.print("Player#"+seatNumber+": ");
-        if(isQuitCheck())System.out.print("已放弃比赛。");
-        else{
-            System.out.print("手牌"+cardNum+"张,");
-            for(int i=0;i<cardNum;i++){
-                Card card = cards[i];
-                System.out.print(card.getShape()+card.getValue()+" ");
+
+    private static class Player{
+        private final int seatNumber;
+        boolean isQuit = false;
+        private int cardNum = 0;
+        public static final int MAX_CARD_NUM = 5;
+        Card[] cards = new Card[MAX_CARD_NUM];
+        
+        Player(int seatNumber){
+            this.seatNumber = seatNumber;
+        }
+        boolean isQuitCheck(){return isQuit;}
+        void printStatus(){
+            System.out.print("Player#"+seatNumber+": ");
+            if(isQuitCheck())System.out.print("已放弃比赛。");
+            else{
+                System.out.print("手牌"+cardNum+"张,");
+                for(int i=0;i<cardNum;i++){
+                    Card card = cards[i];
+                    System.out.print(card.getShape()+card.getValue()+" ");
+                }
             }
+            System.out.print("\n");
         }
-        System.out.print("\n");
-    }
-    boolean addCard(Card card){
-        if(cardNum>=MAX_CARD_NUM){
-            System.out.println("Player#"+seatNumber+"can't add more cards.");
-            return false;
+        boolean addCard(Card card){
+            if(cardNum>=MAX_CARD_NUM){
+                System.out.println("Player#"+seatNumber+"can't add more cards.");
+                return false;
+            }
+            cards[cardNum++]=card;
+            return true;
         }
-        cards[cardNum++]=card;
-        return true;
-    }
-    boolean quit(){
-        if(isQuitCheck()){
-            System.out.println("Player#"+seatNumber+" is already quited, can't quit again.");
-            return false;
+        boolean quit(){
+            if(isQuitCheck()){
+                System.out.println("Player#"+seatNumber+" is already quited, can't quit again.");
+                return false;
+            }
+            isQuit=true;
+            System.out.println("Player#"+seatNumber+" quits.");
+            return true;
         }
-        isQuit=true;
-        System.out.println("Player#"+seatNumber+" quits.");
-        return true;
     }
-}
-class Card{
-    private final String value;
-    private final String shape;
-    Card(String shape,String value){
-        this.value = value;
-        this.shape = shape;
+    private static class Card{
+        private final String value;
+        private final String shape;
+        Card(String shape,String value){
+            this.value = value;
+            this.shape = shape;
+        }
+        String getValue(){return this.value;}
+        String getShape(){return this.shape;}
     }
-    String getValue(){return this.value;}
-    String getShape(){return this.shape;}
 }
