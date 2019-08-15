@@ -22,3 +22,5 @@ javac demo.java -Dfile.encoding=UTF-8
 ```
 ## 解决方案2
 设置环境变量JAVA_TOOL_OPTIONS 的值为 -Dfile.encoding=UTF-8
+
+然后重启命令行。
